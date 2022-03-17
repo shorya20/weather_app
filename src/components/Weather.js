@@ -1,9 +1,9 @@
-import React, {useEffect, useRef} from "react";
-import "./weather.css"
-import {Search} from "@mui/icons-material"
+import React, {useEffect, useRef, useState} from "react";
+import "./weather.css";
+import {Search} from "@mui/icons-material";
+import DisplayData from "./DisplayData";
 const apikey ="AIzaSyDAQnA5O4dCo3o8prv1akaCrd9e9oPqFLg";
 const apibase ="https://maps.googleapis.com/maps/api/js";
-
 //load google map api js
 function loadAsyncScript(src){
     return new Promise((resolve => {
@@ -19,6 +19,11 @@ function loadAsyncScript(src){
 }
 
 export function Weather() {
+    const api_weather = {
+        key: "2668805bfb8558238a0a70ef6be4f2f8",
+        base:"https://api.openweathermap.org/data/2.5/weather"
+    };
+    const [weather,setWeather] = useState([]);
     const searchInput = useRef(null);
     const initMapScript = () => {
         //if script from api is already loaded
@@ -26,18 +31,42 @@ export function Weather() {
             return Promise.resolve();
         }
         const src = `${apibase}?key=${apikey}&libraries=places&v=weekly`;
-        console.log(src)
         return loadAsyncScript(src);
     }
-    const extractPlace = (autocomplete) => {
+    const extractCity = (place) => {
+        const address ={
+            lat : place.geometry.location.lat(),
+            lon : place.geometry.location.lng(),
+        }
+        return address;
+    }
+    const extractPlace = async (autocomplete) => {
         const location = autocomplete.getPlace();
-        console.log(location);
+        if(location.geometry == undefined){
+            alert("Please select from the search options")
+            return;
+        }
+        const address = extractCity(location);
+        if(address.lat == undefined || address.lon == undefined){
+            alert("Please select from the dropdown");
+        }else{
+            console.log(address.lat);
+            console.log(address.lon)
+            const data = fetch(`${api_weather.base}?lat=${address.lat}&lon=${address.lon}&appid=${api_weather.key}&units=metric`)
+            .then((res)=>res.json())
+            .then((data)=>data);
+            const a = await data;
+            console.log(a);
+            setWeather({
+                data:a
+            })
+        }
     }
     //complete the autocomplete function
     const autoComplete = () => {
         if(!searchInput.current) return;
         const autocomplete = new window.google.maps.places.Autocomplete(searchInput.current);
-        autocomplete.setFields(["address_component","geometry"]);
+        autocomplete.setFields(["address_component","geometry","name"]);
         autocomplete.addListener("place_changed", () => extractPlace(autocomplete));
     }
     //now use react hook to load map script after mount. check in console if script map loaded
@@ -49,13 +78,20 @@ export function Weather() {
     return (
     <div className="app">
         <main>
-            <header id="header">
+            <div className="container">
                 <input ref={searchInput} type="text" className="search-bar" placeholder="Search..."/>
                 <Search className="icon"/>
                 &nbsp;
-            </header>
-            <div className="cloudy">
-            </div> 
+            </div>
+            <div>
+                {
+                    weather.data !== undefined ?(
+                        <div>
+                            <DisplayData data ={weather.data} />
+                        </div>
+                    ) : null
+                }
+            </div>
         </main>
     </div>
     );

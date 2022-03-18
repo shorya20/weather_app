@@ -21,7 +21,7 @@ function loadAsyncScript(src){
 export function Weather() {
     const api_weather = {
         key: "2668805bfb8558238a0a70ef6be4f2f8",
-        base:"https://api.openweathermap.org/data/2.5/weather"
+        base:"https://api.openweathermap.org/data/2.5/onecall"
     };
     const [weather,setWeather] = useState([]);
     const searchInput = useRef(null);
@@ -50,8 +50,6 @@ export function Weather() {
         if(address.lat == undefined || address.lon == undefined){
             alert("Please select from the dropdown");
         }else{
-            console.log(address.lat);
-            console.log(address.lon)
             const data = fetch(`${api_weather.base}?lat=${address.lat}&lon=${address.lon}&appid=${api_weather.key}&units=metric`)
             .then((res)=>res.json())
             .then((data)=>data);

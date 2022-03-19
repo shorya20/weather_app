@@ -1,5 +1,7 @@
 import React, {useEffect, useRef, useState} from "react";
+import Button from 'react-bootstrap/Button';
 import "./weather.css";
+import 'bootstrap/dist/css/bootstrap.min.css' 
 import {Search} from "@mui/icons-material";
 import DisplayData from "./DisplayData";
 const apikey ="AIzaSyDAQnA5O4dCo3o8prv1akaCrd9e9oPqFLg";
@@ -68,7 +70,7 @@ export function Weather() {
         autocomplete.addListener("place_changed", () => extractPlace(autocomplete));
     }
     //now use react hook to load map script after mount. check in console if script map loaded
-    useEffect(() =>{
+    useEffect(function map(){
         initMapScript().then(()=>{
             autoComplete()
         })

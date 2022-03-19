@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 function DisplayData(props) {
   const {data} = props;
@@ -9,19 +10,16 @@ function DisplayData(props) {
   const month = today.getMonth();
   let otherDayForecast = ''
   // console.log(data);
-  const weekforecast = data.daily.forEach((day_i,index) => {
+  const weekforecast = data.daily.forEach((day,index) => {
       if(index!=0){
-        otherDayForecast+='<div class="forecast_weather"><div class="place_temp_future"><div class="date">'+console.log(day_i)+', '+months[month]+'</div><div class="temp"><p>Max '+Math.round(data.daily[index].temp.max)+'°C</p><p>Min '+Math.round(data.daily[index].temp.min)+'°C</p></div></div></div>'
+        otherDayForecast+='<div class="forecast_weather"><div class="place_temp_future"><div class="date">'+moment(day.dt*1000).format('dddd')+', '+moment(day.dt*1000).format('Do')+'</div><div class="temp"><p>Max '+Math.round(data.daily[index].temp.max)+'°C</p><p>Min '+Math.round(data.daily[index].temp.min)+'°C</p></div></div></div>'
       }
   });
   return(
     <div>
         <div className="placeinfo">
           <div className="top">
-            <div className="time">
-              <p>{today.getHours() >= 13 ? today.getHours()%12 +':'+ today.getMinutes() + 'PM': today.getHours() +':'+ today.getMinutes() + 'AM'}</p>
-            </div>
-            <div className="date">{days[day]},{today.getDate()} {months[month]}</div>
+            <div className="date_time">{today.toLocaleString('en-US',{timeZone:data.timezone,weekday:'short',hour:'numeric',minute:'numeric',year:'numeric'})}</div>
           </div>
         </div>
         <div className="place_temp_current">
@@ -33,7 +31,7 @@ function DisplayData(props) {
           <div className="indexes">
             <div className="feelslike"><p>Feels like {data.current.feels_like.toFixed()}°C</p></div>
             <div className="description"><p>{data.current.weather[0].description}</p></div>
-            <div className = "windspeed"><p>{Math.round(data.current.wind_speed)}mph</p></div>
+            <div className = "windspeed"><p>Wind speed: {Math.round(data.current.wind_speed)}mph</p></div>
             <div className = "uvindex"><p>UV Index: {Math.round(data.daily[0].uvi)}</p></div>
           </div>
         </div>

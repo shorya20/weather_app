@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
+import $ from 'jquery';
 function DisplayData(props) {
   const {data} = props;
   const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday','Saturday'];
@@ -9,10 +10,11 @@ function DisplayData(props) {
   const day = today.getDay();
   const month = today.getMonth();
   let otherDayForecast = ''
+  const iconurl = "http://openweathermap.org/img/wn/" + `${data.current.weather[0].icon}` +"@2x.png";
   // console.log(data);
   const weekforecast = data.daily.forEach((day,index) => {
       if(index!=0){
-        otherDayForecast+='<div class="forecast_weather"><div class="place_temp_future"><div class="date">'+moment(day.dt*1000).format('dddd')+', '+moment(day.dt*1000).format('Do')+'</div><div class="temp"><p>Max '+Math.round(data.daily[index].temp.max)+'°C</p><p>Min '+Math.round(data.daily[index].temp.min)+'°C</p></div></div></div>'
+        otherDayForecast+='<div class="forecast_weather"><div class="place_temp_future"><div class="date">'+moment(day.dt*1000).format('dddd')+', '+moment(day.dt*1000).format('Do')+'</div><div class="temp"><img src ="http://openweathermap.org/img/wn/'+data.current.weather[0].icon+'.png"></img>'+'<p>Max '+Math.round(data.daily[index].temp.max)+'°C</p><p>Min '+Math.round(data.daily[index].temp.min)+'°C</p></div></div></div>'
       }
   });
   return(
@@ -25,6 +27,7 @@ function DisplayData(props) {
         <div className="place_temp_current">
           <div className="temp">  
             <h1>{Math.round(data.current.temp)}°C</h1>
+            <img src = {iconurl} className="cur-weather-icon"></img>
             <p>Max {Math.round(data.daily[0].temp.max)}°C</p>
             <p>Min {Math.round(data.daily[0].temp.min)}°C</p>
           </div>

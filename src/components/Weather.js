@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from "react";
-import Button from 'react-bootstrap/Button';
+import {Button,Container,Row} from 'react-bootstrap';
 import "./weather.css";
 import 'bootstrap/dist/css/bootstrap.min.css' 
 import {Search} from "@mui/icons-material";
@@ -78,11 +78,11 @@ export function Weather() {
     return (
     <div className="app">
         <main>
-            <div className="container">
-                <input ref={searchInput} type="text" className="search-bar" placeholder="Search..."/>
-                <Search className="icon"/>
-                &nbsp;
-            </div>
+            <Container>
+                <Row>
+                <input ref={searchInput} type="text" className="search-bar justify-content center " placeholder="Search..."/>
+                </Row>
+            </Container>
             <div>
                 {
                     weather.data !== undefined ?(

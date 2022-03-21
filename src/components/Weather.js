@@ -2,10 +2,11 @@ import React, {useEffect, useRef, useState} from "react";
 import {Button,Container,Row} from 'react-bootstrap';
 import "./weather.css";
 import 'bootstrap/dist/css/bootstrap.min.css' 
-import {Search} from "@mui/icons-material";
+import {Search,GpsFixed} from "@mui/icons-material";
 import DisplayData from "./DisplayData";
 const apikey ="AIzaSyDAQnA5O4dCo3o8prv1akaCrd9e9oPqFLg";
 const apibase ="https://maps.googleapis.com/maps/api/js";
+const geobase = "https://maps.googleapis.com/maps/api/geocode/json";
 //load google map api js
 function loadAsyncScript(src){
     return new Promise((resolve => {
@@ -26,6 +27,7 @@ export function Weather() {
         base:"https://api.openweathermap.org/data/2.5/onecall"
     };
     const [weather,setWeather] = useState([]);
+    const [address,setAddress] = useState([]);
     const searchInput = useRef(null);
     const initMapScript = () => {
         //if script from api is already loaded
@@ -62,6 +64,31 @@ export function Weather() {
             })
         }
     }
+    const reverseGeocode = async({latitude:lat,longitude:lng})=>{
+        const data = fetch(`${api_weather.base}?lat=${lat}&lon=${lng}&appid=${api_weather.key}&units=metric`)
+            .then((res)=>res.json())
+            .then((data)=>data);
+            const a = await data;
+            console.log(a);
+            setWeather({
+                data:a
+            })
+            const url = `${geobase}?key=${apikey}&latlng=${lat},${lng}`
+            fetch(url)
+                .then(response => response.json())
+                .then(location => {
+                const place = location.results[0];
+                console.log(place);
+                searchInput.current.value = place.address_components[1].short_name;
+                })
+    }
+    const findMyLocation = () =>{
+        if(navigator.geolocation){
+            navigator.geolocation.getCurrentPosition(position=>{
+                reverseGeocode(position.coords)
+            })
+        }
+    }
     //complete the autocomplete function
     const autoComplete = () => {
         if(!searchInput.current) return;
@@ -80,7 +107,9 @@ export function Weather() {
         <main>
             <Container>
                 <Row>
-                <input ref={searchInput} type="text" className="search-bar justify-content center " placeholder="Search..."/>
+                <input ref={searchInput} type="text" className="search-bar col-10 justify-content center " placeholder="Search..."/>
+                &nbsp;
+                <button className="col" onClick={findMyLocation}><GpsFixed /></button>
                 </Row>
             </Container>
             <div>

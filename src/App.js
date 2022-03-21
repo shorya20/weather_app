@@ -5,11 +5,11 @@ import 'bootstrap/dist/css/bootstrap.min.css' ;
 import 'bootstrap';
 function App() {
   return (
-    <body>
+    <main>
       <div className="container-fluid App-bgimage">
         <Weather />
       </div>
-    </body>
+    </main>
   );
 }
 export default App;

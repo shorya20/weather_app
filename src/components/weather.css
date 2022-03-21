@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 .App-bgimage{
-  background:url("../assets/clouds.jpg");
+  background:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url("../assets/clouds.jpg");
   height:100vh;
   background-position:center;
   background-repeat: no-repeat;

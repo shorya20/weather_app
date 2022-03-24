@@ -29,6 +29,12 @@ Google Places API (advanced explanation: after React has rendered DOM, we call t
         - User will have to enter a place properly on the search bar, otherwise a pop-up alert is shown.
         - Weather Features are discussed in the next js file DisplayData.js 
         - Allows the user to switch between Celsius and Fahrenheit effectively
+        -Extensions: Celsius/Fahrenheit conversion, search bar and language feature.
+
+        API constraints faced from previously decided features:
+            -Language change for the JSON object received only contains language change in the description.
+            -No concrete precipitation data which can be outlined for the current day.
+            
 
 */
 function loadAsyncScript(src){

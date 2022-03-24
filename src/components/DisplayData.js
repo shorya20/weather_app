@@ -10,7 +10,15 @@ export function DisplayData(props) {
   const unit = props.data[1];
   var today = new Date();
   let otherDayForecast = '';
+/* 
+    Description of the section: This component will describe how implemented React-Bootstrap for responsive and a cleaner aesthetic design for our application.
+    We used bootstrap components such as Cards, ProgressBar, Flexible containers, Cols and Rows. 
 
+    Targets it solves for the application:
+      - Simple effective and interactive design choices for our implementation with usage of both React-Bootstrap and CSS.
+      - The DOM model is differentiated with containers holding rows and columns to showcase them as it can be seen in the 7-day forecast code. Therefore the 
+      rendering of the individual columns holding data for that individual day will all be responsive and within that one row which is fixed at the center.
+*/
   function recommendation(data){
     if(data.current.weather[0].main=="Rain"||data.current.weather[0].main=="drizzle"||data.current.weather[0].main.toLowerCase()=="thunderstorm"){
       return document.getElementsByClassName("recommendations").innerHTML = <Card className="cardshape ">

@@ -2,7 +2,7 @@
   "name": "new_weather_app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://shorya20.github.io/weather_app/src/",
+  "homepage": "https://shorya20.github.io/weather_app/",
   "dependencies": {
     "-": "^0.0.1",
     "@emotion/react": "^11.8.2",

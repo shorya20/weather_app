@@ -19,23 +19,24 @@ export function DisplayData(props) {
       - The DOM model is differentiated with containers holding rows and columns to showcase them as it can be seen in the 7-day forecast code. Therefore the 
       rendering of the individual columns holding data for that individual day will all be responsive and within that one row which is fixed at the center.
 */
+  console.log(data);
   function recommendation(data){
-    if(data.current.weather[0].main=="Rain"||data.current.weather[0].main=="drizzle"||data.current.weather[0].main.toLowerCase()=="thunderstorm"){
+    if(data.current.weather[0].main=="Rain"||data.current.weather[0].main=="Drizzle"||data.current.weather[0].main.toLowerCase()=="thunderstorm"){
       return document.getElementsByClassName("recommendations").innerHTML = <Card className="cardshape ">
       <Card.Body className="recombody ">
       <Card.Title>Recommendation</Card.Title>
       <Card.Text>
-        <p>Be careful! Please take an umbrella!</p>
+        Be careful! Please take an umbrella!
       </Card.Text>
       </Card.Body>
     </Card>;
     }
     else if(data.current.weather[0].main=="Snow"){
       return document.getElementsByClassName("recommendations").innerHTML =<Card className="cardshape">
-      <Card.Body className="recombody input-block-level form-control">
+      <Card.Body className="recombody">
       <Card.Title>Recommendation</Card.Title>
       <Card.Text>
-        <p>Please wear warmer clothes and keep winter gloves and a scarf with you!</p>
+        Please wear warmer clothes and keep winter gloves and a scarf with you!
       </Card.Text>
       </Card.Body>
     </Card>;

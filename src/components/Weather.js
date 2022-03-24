@@ -157,65 +157,94 @@ export function Weather() {
             autoComplete();
         })
     },[]);
-    return (
-    <div className="app">
-        <main>
-            <Container className="fluid">
-                <Row className="align-items-start">
-                    <div className="col-7">
-                        <input ref={searchInput} type="text" className="col search-bar" placeholder="Search..."/>
-                    </div>
-                    <div className="col-2 gps-div">
-                        <button className="gps btn input-block-level form-control" onClick={findMyLocation}><GpsFixed id="icon"/></button>
-                    </div>
-                    <div className="col-2 button-drop">
-                        <DropdownButton className="dropdown-basic" title="Lang">
-                            <Dropdown.Item onClick={()=>langSelect("en")}>English</Dropdown.Item>
-                            <Dropdown.Item onClick={()=>langSelect("de")}>German</Dropdown.Item>
-                            <Dropdown.Item onClick={()=>langSelect("zh_tw")}>Chinese</Dropdown.Item>
-                            <Dropdown.Item onClick={()=>langSelect("nl")}>Dutch</Dropdown.Item>
-                            <Dropdown.Item onClick={()=>langSelect("it")}>Italian</Dropdown.Item>
-                            <Dropdown.Item onClick={()=>langSelect("kr")}>Korean</Dropdown.Item>
-                            <Dropdown.Item onClick={()=>langSelect("ja")}>Japanese</Dropdown.Item>
-                            <Dropdown.Item onClick={()=>langSelect("hi")}>Hindi</Dropdown.Item>
-                            <Dropdown.Item onClick={()=>langSelect("el")}>Greek</Dropdown.Item>
-                            <Dropdown.Item onClick={()=>langSelect("fr")}>French</Dropdown.Item>
-                            <Dropdown.Item onClick={()=>langSelect("pt")}>Portuguese</Dropdown.Item>
-                            <Dropdown.Item onClick={()=>langSelect("es")}>Spanish</Dropdown.Item>
-                        </DropdownButton>
-                    </div>
-                </Row>
-            </Container>
-            <div>
-                {
+    function backgroundchange(){
 
-                    weather.data !== undefined ?(
-                        <div>
-                            <div className="row">
-                                <ButtonGroup>
-                                    {radios.map((radio, values) => (
-                                    <ToggleButton 
-                                        key={values}
-                                        id={`radio-${values}`}
-                                        variant={radio.value=="metric" ? "outline-success" : "outline-warning"}
-                                        type="radio"
-                                        name="radio"
-                                        value={radio.value}
-                                        checked={radioValue === radio.value}
-                                        onChange={(e) => setRadioValue(e.currentTarget.value)}
-                                        onClick={(e) => Units(radio.value)}
-                                    >   
-                                        {radio.name}
-                                    </ToggleButton>
-                                    ))}
-                                </ButtonGroup>
-                            </div>
-                            <DisplayData data ={[weather.data,units=="metric"?"°C":"°F"]} />
+        if (weather.data !== undefined)
+        {
+
+        if(weather.data.current.weather[0].main=="Rain"||weather.data.current.weather[0].main=="Drizzle"||weather.data.current.weather[0].main=="Thunderstorm"){
+            return 'App-bgimage-rainy bg'
+        }
+        else if(weather.data.current.weather[0].main=="Snow"){
+          return 'App-bgimage-cold bg'
+        }
+        else if(weather.data.current.weather[0].main=="Clear"||weather.data.current.weather[0].main=="Clouds")
+        {
+          return  'App-bgimage-warm bg'
+        }
+        else
+        {
+            return 'App-bgimage bg'
+        }
+
+    }
+    else
+    {
+        return 'App-bgimage bg'
+    }
+
+    }
+    return (
+    <div className= {backgroundchange()}>
+        <div className="app">
+            <main>
+                <Container className="fluid">
+                    <Row className="align-items-start">
+                        <div className="col-7">
+                            <input ref={searchInput} type="text" className="col search-bar" placeholder="Search..."/>
                         </div>
-                    ) : null
-                }
-            </div>
-        </main>
+                        <div className="col-2 gps-div">
+                            <button className="gps btn input-block-level form-control" onClick={findMyLocation}><GpsFixed id="icon"/></button>
+                        </div>
+                        <div className="col-2 button-drop">
+                            <DropdownButton className="dropdown-basic" title="Lang">
+                                <Dropdown.Item onClick={()=>langSelect("en")}>English</Dropdown.Item>
+                                <Dropdown.Item onClick={()=>langSelect("de")}>German</Dropdown.Item>
+                                <Dropdown.Item onClick={()=>langSelect("zh_tw")}>Chinese</Dropdown.Item>
+                                <Dropdown.Item onClick={()=>langSelect("nl")}>Dutch</Dropdown.Item>
+                                <Dropdown.Item onClick={()=>langSelect("it")}>Italian</Dropdown.Item>
+                                <Dropdown.Item onClick={()=>langSelect("kr")}>Korean</Dropdown.Item>
+                                <Dropdown.Item onClick={()=>langSelect("ja")}>Japanese</Dropdown.Item>
+                                <Dropdown.Item onClick={()=>langSelect("hi")}>Hindi</Dropdown.Item>
+                                <Dropdown.Item onClick={()=>langSelect("el")}>Greek</Dropdown.Item>
+                                <Dropdown.Item onClick={()=>langSelect("fr")}>French</Dropdown.Item>
+                                <Dropdown.Item onClick={()=>langSelect("pt")}>Portuguese</Dropdown.Item>
+                                <Dropdown.Item onClick={()=>langSelect("es")}>Spanish</Dropdown.Item>
+                            </DropdownButton>
+                        </div>
+                    </Row>
+                </Container>
+                <div>
+                    {
+
+                        weather.data !== undefined ?(
+                            <div>
+                                <div className="row">
+                                    <ButtonGroup>
+                                        {radios.map((radio, values) => (
+                                        <ToggleButton 
+                                            key={values}
+                                            id={`radio-${values}`}
+                                            variant={radio.value=="metric" ? "outline-success" : "outline-warning"}
+                                            type="radio"
+                                            name="radio"
+                                            value={radio.value}
+                                            checked={radioValue === radio.value}
+                                            onChange={(e) => setRadioValue(e.currentTarget.value)}
+                                            onClick={(e) => Units(radio.value)}
+                                        >   
+                                            {radio.name}
+                                        </ToggleButton>
+                                        ))}
+                                    </ButtonGroup>
+                                </div>
+                                <DisplayData data ={[weather.data,units=="metric"?"°C":"°F"]} />
+                            </div>
+                        ) : null
+                    }
+                </div>
+            </main>
+        </div>
     </div>
     );
 }

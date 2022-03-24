@@ -123,11 +123,12 @@ Clone this repository, install the required dependancies as stated and run it.
 ### Dependancies required
 * npm install bootstrap
   ```sh
-  npm install react-html-parser
-  ```
-  npm install @mui/icons-material
+* npm install react-html-parser
   ```sh
-  npm install moment
+* npm install @mui/icons-material
+  ```sh
+* npm install moment
+  ```sh
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

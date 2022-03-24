@@ -14,41 +14,79 @@ body
 .top
 {
     text-align: center;
-    padding: 2%;
+    padding: 1em;
     color: aliceblue;    
 }
 
 h1
 {
     font-weight: bold;
-    font-size:auto;
+    font-size: auto;
+}
+
+.weatherdate
+{
+    font-size: 3.5em;
+    padding-top: 0.5em;
 }
 
 .date_time
 {
-    font-size: 1.5em;
+    font-size: 2em;
+}
+
+.todayTemp
+{
+    font-size: 4.5em;
+}
+
+.day
+{
+    padding-top: 0.7em;
+    font-size: 2.7em;
+}
+
+.maxmin,.feelslike,.description
+{
+    font-size: 1.2em;
 }
 
 .currentweather,.indexes
 {   
-    background-image:linear-gradient(to right, rgba(78, 166, 207, 0.89),rgba(0, 0, 0, 0.2)) ;
-    padding: 2em;
+    padding: 2.5em;
     margin: 2em;
-    border-radius: 20%;
+    border-radius: 4em;
     box-shadow: 5px 5px 5px rgba(58, 53, 54, 0.87);
 }
 
 .currentweather
 {
+    background-color: rgba(128, 15, 47, 0.840);
     color: aliceblue;
 }
-.precipication,.uvindex,.humidity,.windspeed,.recommendations
+
+.indexes
 {
-    font-weight: bold;
+    background-color: rgba(187, 43, 84, 0.84);
+}
+.precipitation,.uvindex,.humidity,.windspeed
+{
     color: aliceblue;    
     font-size: 1.5em;
+}
+
+.precipitation,.humidity
+{
+    font-weight: bold;
 
 }
+
+.uvtitle,.windtitle
+{
+    font-weight: bold;
+    padding-top: 1em;
+}
+
 
 .maxmin
 {
@@ -56,25 +94,43 @@ h1
 }
 .feelslike
 {
-    padding-top: 0%;
+    padding-top: 0.9em;
 }
-.recommendations{
-    padding: 2em;
+
+.index1
+{
+    padding-right: 1em;
+}
+
+
+.windspeedno,.uvno
+{
+    font-size: 0.7em;
+    font-weight: bold;
+    padding-top: 1em;
+}
+
+.description
+{
+    padding-top: 0.3em; 
+}
+
+.recommendations
+{
+    padding: 1em;
+    color: aliceblue;    
+    font-size: 1.5em;
+    font-weight: bold;
 }
 .recommendations:empty{
     display:none;
 }
 .cardshape
-{   
-    background-color: rgb(177, 201, 41);
-    box-shadow: 0px 5px 3px rgba(0, 0, 0, 0.2);
+{
+    background-color: rgba(197, 45, 73, 0.84);
+    box-shadow: 5px 5px 5px rgba(58, 53, 54, 0.87);
     padding: 2%;
     color: black;
-    
-}
-.title{
-    color:rgb(36, 4, 4);
-    text-shadow: 0px 0px 4px;
 }
 .recombody ::backdrop{
     background-color: rgba(27, 83, 90, 0.2);
@@ -83,34 +139,10 @@ h1
     border-radius: 3%;
     width:70%;
     box-shadow: 0px 5px 3px rgba(0,0,0,0.2);
-    background:linear-gradient(to bottom,rgba(156, 63, 136, 0.63),rgba(102, 99, 99, 0.4));
+    background:linear-gradient(to bottom,rgba(156, 63, 136, 0.63),rgba(114, 106, 114, 0.4));
 }
 .place_temp_future{
     font-size: small;
     text-align: center;
 }
-
-/* testing */
-
-/* .cardshape
-{
-    border-radius: 20%;
-
-} */
-
-/* .top
-{
-    background-color: antiquewhite;
-    
-}
-
-.placeinfo
-{
-    background-color: red;
-} */
-
-/* .place_temp_current
-{
-    background-color: yellow;
-} */
 

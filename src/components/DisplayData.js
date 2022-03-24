@@ -10,13 +10,14 @@ export function DisplayData(props) {
   const unit = props.data[1];
   var today = new Date();
   let otherDayForecast = '';
+
   function recommendation(data){
     if(data.current.weather[0].main=="Rain"||data.current.weather[0].main=="drizzle"||data.current.weather[0].main.toLowerCase()=="thunderstorm"){
       return document.getElementsByClassName("recommendations").innerHTML = <Card className="cardshape ">
       <Card.Body className="recombody ">
-      <Card.Title className="title">Recommendation!</Card.Title>
+      <Card.Title>Recommendation</Card.Title>
       <Card.Text>
-        <p>Please take an umbrella!</p>
+        <p>Be careful! Please take an umbrella!</p>
       </Card.Text>
       </Card.Body>
     </Card>;
@@ -24,9 +25,9 @@ export function DisplayData(props) {
     else if(data.current.weather[0].main=="Snow"){
       return document.getElementsByClassName("recommendations").innerHTML =<Card className="cardshape">
       <Card.Body className="recombody input-block-level form-control">
-      <Card.Title>Recommendation!</Card.Title>
+      <Card.Title>Recommendation</Card.Title>
       <Card.Text>
-        <p>Wear warmer clothes!</p>
+        <p>Please wear warmer clothes and keep winter gloves and a scarf with you!</p>
       </Card.Text>
       </Card.Body>
     </Card>;
@@ -35,43 +36,47 @@ export function DisplayData(props) {
   }
   const iconurl = "http://openweathermap.org/img/wn/" + `${data.current.weather[0].icon}` +"@2x.png";
   // console.log(data);
+  // A loop that will display the 7-day forecast by date,an icon showing what the weather is like and the maximum/minum temperature 
+
   const weekforecast = data.daily.forEach((day,index) => {
       if(index!=0){
         otherDayForecast+='<div class="place_temp_future col"><div class="date"><p>'+moment(day.dt*1000).format('dddd')+','+moment(day.dt*1000).format('Do')+'</p></div><div class="temp"><img src ="http://openweathermap.org/img/wn/'+data.daily[index].weather[0].icon+'.png"></img>'+'<p>Max '+Math.round(data.daily[index].temp.max)+unit+'</p><p>Min '+Math.round(data.daily[index].temp.min)+unit+'</p></div></div>'
       }
   });
+
+  // calculations to be displayed in the progress bar
   const barpop = Math.round(data.daily[0].pop*100);
   const baruv = Math.round(data.daily[0].uvi);
   const barhumidity= data.current.humidity;
   const barwind= Math.round(data.current.wind_speed);
+  
   return(
     <div>
       <Container className="fluid">
           <Row>
           <div className="placeinfo">
               <div className="top">
-                <h1> {new Date().toLocaleString("en-US", { day : '2-digit'})} {new Date().toLocaleString("en-US", { month: "long" })} {new Date().getFullYear()}</h1>
+                <h1 className="weatherdate"> {new Date().toLocaleString("en-US", { day : '2-digit'})} {new Date().toLocaleString("en-US", { month: "long" })} {new Date().getFullYear()}</h1>
                 <h2 className="date_time">{today.toLocaleString('en-US',{timeZone:data.timezone,hour:'numeric',minute:'numeric'})}</h2>
               </div>
           </div>
           </Row>
 
         <div className="place_temp_current">
-          <div className="currentweather">
-            <Row >
-              <Col>
-                <div className="temp">  
-                  <Stack gap={3}>
-                    <h1>{Math.round(data.current.temp)}{unit}</h1>
-                    <h2 className="maxmin">Max/Min: {Math.round(data.daily[0].temp.max)}{unit}/{Math.round(data.daily[0].temp.min)}{unit}</h2>
-                    <h2 className="feelslike"><p>Feels like {data.current.feels_like.toFixed()}{unit}</p></h2>
-                  </Stack>
-                </div>
-              </Col>
-
+            <div className="currentweather">
+              <Row class="rounded">
+                <Col>
+                  <div className="temp">  
+                    <Stack gap={3}>
+                      <h1 className="todayTemp">{Math.round(data.current.temp)}{unit}</h1>
+                      <h2 className="maxmin">Max/Min: {Math.round(data.daily[0].temp.max)}{unit}/{Math.round(data.daily[0].temp.min)}{unit}</h2>                      
+                      <h2 className="feelslike"><p>Feels like {data.current.feels_like.toFixed()}{unit}</p></h2>                    
+                      </Stack>
+                  </div>
+                </Col>
               <Col>
                 <div className="weatherinfo">
-                  <h1>{new Date().toLocaleString("en", { weekday: "long" })}</h1>
+                  <h1 className="day">{new Date().toLocaleString("en", { weekday: "long" })}</h1>
                   <img src = {iconurl} className="cur-weather-icon"></img>
                   <h2 className="description"><p>{data.current.weather[0].description}</p></h2>
                 </div>
@@ -81,16 +86,16 @@ export function DisplayData(props) {
 
 
           <div className="indexes">
-            <Row>
+            <Row class="rounded">
                 <Col>
                   <div className="index1">
                     <Stack gap={2}>
-                      <div className="precipication">
-                        <p>Precipitation chance today:</p>
+                      <div className="precipitation">
+                        <p>Precipitation</p>
                         <ProgressBar now={barpop} label={`${barpop}%`}/>
                       </div>
                       <div className = "uvindex">
-                        <p>UV Index<br></br>{baruv}</p>
+                        <p><div className="uvtitle">UV Index</div><div className="uvno">{baruv}</div></p>
                       </div>
                     </Stack>
                   </div>
@@ -104,7 +109,7 @@ export function DisplayData(props) {
                         <ProgressBar now={barhumidity} label={`${barhumidity}%`}/>
                       </div>
                       <div className = "windspeed">
-                        <p>Wind speed<br></br>{barwind}mph</p>
+                        <p><div className="windtitle">Wind speed</div><div className="windspeedno">{barwind} mph</div></p>
                       </div>
                     </Stack>
                   </div> 

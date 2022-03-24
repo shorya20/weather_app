@@ -5,13 +5,32 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import {ArrowDropDown,GpsFixed} from "@mui/icons-material";
 import DisplayData from "./DisplayData";
 import $ from 'jquery';
-import { render } from "@testing-library/react";
 const apikey ="AIzaSyDAQnA5O4dCo3o8prv1akaCrd9e9oPqFLg";
 const apibase ="https://maps.googleapis.com/maps/api/js";
 const geobase = "https://maps.googleapis.com/maps/api/geocode/json";
 var lang = "en";
 var units = "metric";
-//load google map api js
+/* Description of the section: Weather.js will involve fetch implementation of the search-bar for the Google autocomplete/geocode functionality first 
+first by allowing the user to select a defined place from the search-bar. We will be using jquery to render the information to be stated back to App.js
+and the information to be displayed will be retrieved by DisplayData.js. The script holds 2 main API fetches, with each one involving the apikey, apiurl
+to receive information from(in this case it will be OpenWeatherMap and Google Places API) and using the latitude and longitude values we get from the 
+Google Places API (advanced explanation: after React has rendered DOM, we call the UseEffect hook to autocomplete through the window function specified
+    and add a listener which will call the extractPlace function once clicked).
+
+    Upon autocomplete event occuring, we get the place in question and get the latitude and longitude using fetch to get weather from openweathermap. However, it
+    most important factor here is the await statement(for which the function is async). The await expression causes async function execution to pause until a Promise is settled 
+    (that is, fulfilled or rejected), and to resume execution of the async function after fulfillment.
+
+    Targets it solves for the application:
+        - Primary stakeholder with GPS and Wifi capability on their phone devices can access the app anywhere they want to, even to the nearest street. 
+        - Primary stakeholder can have any phone screen size and the application will be responsive once rendered
+        - GPS geocode will point out the lat/long values and provide accurate information to the young-adult tourists aged between 16-30, they also can 
+        get the description of the weather in the language they want to on variety of choices.
+        - User will have to enter a place properly on the search bar, otherwise a pop-up alert is shown.
+        - Weather Features are discussed in the next js file DisplayData.js 
+        - Allows the user to switch between Celsius and Fahrenheit effectively
+
+*/
 function loadAsyncScript(src){
     return new Promise((resolve => {
         const script = document.createElement("script");
@@ -31,7 +50,6 @@ export function Weather() {
         base:"https://api.openweathermap.org/data/2.5/onecall"
     };
     const [weather,setWeather] = useState([]);
-    const [checked, setChecked] = useState(false);
     const [radioValue, setRadioValue] = useState('metric');
     
     const radios = [

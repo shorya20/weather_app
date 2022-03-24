@@ -197,8 +197,8 @@ export function Weather() {
                                     <ToggleButton 
                                         key={values}
                                         id={`radio-${values}`}
+                                        variant={radio.value=="metric" ? "outline-success" : "outline-warning"}
                                         type="radio"
-                                        variant={values=="Celsius" ? 'outline-success' : 'outline-danger'}
                                         name="radio"
                                         value={radio.value}
                                         checked={radioValue === radio.value}

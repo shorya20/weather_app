@@ -1,0 +1,116 @@
+/* Imported from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap'); 
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body
+{
+    font-family: 'Poppins', sans-serif;
+} 
+
+.top
+{
+    text-align: center;
+    padding: 2%;
+    color: aliceblue;    
+}
+
+h1
+{
+    font-weight: bold;
+    font-size:auto;
+}
+
+.date_time
+{
+    font-size: 1.5em;
+}
+
+.currentweather,.indexes
+{   
+    background-image:linear-gradient(to right, rgba(78, 166, 207, 0.89),rgba(0, 0, 0, 0.2)) ;
+    padding: 2em;
+    margin: 2em;
+    border-radius: 20%;
+    box-shadow: 5px 5px 5px rgba(58, 53, 54, 0.87);
+}
+
+.currentweather
+{
+    color: aliceblue;
+}
+.precipication,.uvindex,.humidity,.windspeed,.recommendations
+{
+    font-weight: bold;
+    color: aliceblue;    
+    font-size: 1.5em;
+
+}
+
+.maxmin
+{
+    padding-top: 8%;
+}
+.feelslike
+{
+    padding-top: 0%;
+}
+.recommendations{
+    padding: 2em;
+}
+.recommendations:empty{
+    display:none;
+}
+.cardshape
+{   
+    background-color: rgb(177, 201, 41);
+    box-shadow: 0px 5px 3px rgba(0, 0, 0, 0.2);
+    padding: 2%;
+    color: black;
+    
+}
+.title{
+    color:rgb(36, 4, 4);
+    text-shadow: 0px 0px 4px;
+}
+.recombody ::backdrop{
+    background-color: rgba(27, 83, 90, 0.2);
+}
+#displayforecast{
+    border-radius: 3%;
+    width:70%;
+    box-shadow: 0px 5px 3px rgba(0,0,0,0.2);
+    background:linear-gradient(to bottom,rgba(156, 63, 136, 0.63),rgba(102, 99, 99, 0.4));
+}
+.place_temp_future{
+    font-size: small;
+    text-align: center;
+}
+
+/* testing */
+
+/* .cardshape
+{
+    border-radius: 20%;
+
+} */
+
+/* .top
+{
+    background-color: antiquewhite;
+    
+}
+
+.placeinfo
+{
+    background-color: red;
+} */
+
+/* .place_temp_current
+{
+    background-color: yellow;
+} */
+

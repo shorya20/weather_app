@@ -3,11 +3,15 @@
   padding: 0;
   box-sizing: border-box;
 }
+p,h1{
+  color:white;
+}
 .App-bgimage{
-  background:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url("../assets/clouds.jpg");
-  height:100vh;
-  background-position:center;
-  background-repeat: no-repeat;
+  background:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url("../assets/clouds.jpg") no-repeat   center center fixed;
+  min-height:100vh;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
   background-size: cover;
 }
 input[type="text"]{
@@ -16,7 +20,8 @@ input[type="text"]{
 }
 .search-bar{
   z-index: 0;
-  height:2.5em;
+  height:2.8em;
+  width:100%;
   display: inline-block;
   appearance: none;
   border: none;
@@ -30,8 +35,30 @@ input[type="text"]{
 .container header .search-bar:focus{
   background-color: rgba(255,255,255,0.85);
 }
-.icon{
-  z-index: 1;
-  height:50%;
+.app{
+  padding-top:10px;
+}
+.main{
+  padding-top: 10px;
+  padding-bottom:5px;
+}
+.dropdown-conent{
+  display:block;
+}
+.gps-div{
+  border: 1px solid black;
+  background:linear-gradient(to bottom,rgba(236, 232, 227, 0.548),rgba(74, 165, 226, 0.918));
+  height:2.3em;
+}
+#icon{
+  height:inherit;
+  font-size:auto;
+  justify-content:center;
+}
+.dropdown-basic{
+  height:1px;
+}
+.btn-sample:active {
+  box-shadow: none;
 }
 

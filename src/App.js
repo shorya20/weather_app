@@ -6,7 +6,7 @@ import 'bootstrap';
 function App() {
   return (
     <main>
-      <div className="container-fluid App-bgimage">
+      <div className="App-bgimage">
         <Weather />
       </div>
     </main>

@@ -78,7 +78,7 @@ export function Weather() {
         }
         return address;
     }
-    const fetchData = (...args) => {
+    const fetchData = async(...args) => {
         if(weather.data!==undefined){
             const data = fetch(`${api_weather.base}?lat=${weather.data.lat}&lon=${weather.data.lon}&appid=${api_weather.key}&lang=${lang}&units=${units}`)
             .then((res)=>res.json())
@@ -157,13 +157,13 @@ export function Weather() {
         if (weather.data !== undefined)
         {
 
-        if(weather.data.current.weather[0].main=="Rain"||weather.data.current.weather[0].main=="Drizzle"||weather.data.current.weather[0].main=="Thunderstorm"){
+        if(weather.data.current.weather[0].main==="Rain"||weather.data.current.weather[0].main=="Drizzle"||weather.data.current.weather[0].main=="Thunderstorm"){
             return 'App-bgimage-rainy bg'
         }
-        else if(weather.data.current.weather[0].main=="Snow"){
+        else if(weather.data.current.weather[0].main==="Snow"){
           return 'App-bgimage-cold bg'
         }
-        else if(weather.data.current.weather[0].main=="Clear"||weather.data.current.weather[0].main=="Clouds")
+        else if(weather.data.current.weather[0].main==="Clear"||weather.data.current.weather[0].main=="Clouds")
         {
           return  'App-bgimage-warm bg'
         }
@@ -220,7 +220,7 @@ export function Weather() {
                                         <ToggleButton 
                                             key={values}
                                             id={`radio-${values}`}
-                                            variant={radio.value=="metric" ? "outline-success" : "outline-warning"}
+                                            variant={radio.value==="metric" ? "outline-success" : "outline-warning"}
                                             type="radio"
                                             name="radio"
                                             value={radio.value}
@@ -233,7 +233,7 @@ export function Weather() {
                                         ))}
                                     </ButtonGroup>
                                 </div>
-                                <DisplayData data ={[weather.data,units=="metric"?"°C":"°F"]} />
+                                <DisplayData data ={[weather.data,units==="metric"?"°C":"°F"]} />
                             </div>
                         ) : null
                     }

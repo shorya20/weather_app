@@ -78,6 +78,17 @@ export function Weather() {
         }
         return address;
     }
+    const fetchData = (...args) => {
+        if(weather.data!==undefined){
+            const data = fetch(`${api_weather.base}?lat=${weather.data.lat}&lon=${weather.data.lon}&appid=${api_weather.key}&lang=${lang}&units=${units}`)
+            .then((res)=>res.json())
+            .then((data)=>data);
+            const a = await data;
+            setWeather({
+                data:a
+            })
+        }
+    }
     const extractPlace = async (autocomplete) => {
         const location = autocomplete.getPlace();
         if(location.geometry == undefined){
@@ -122,27 +133,11 @@ export function Weather() {
     }
     async function langSelect (langset){
         lang = langset;
-        if(weather.data!==undefined){
-            const data = fetch(`${api_weather.base}?lat=${weather.data.lat}&lon=${weather.data.lon}&appid=${api_weather.key}&lang=${lang}&units=${units}`)
-            .then((res)=>res.json())
-            .then((data)=>data);
-            const a = await data;
-            setWeather({
-                data:a
-            })
-        }
+        fetchData();
     }
     async function Units(unitschange){
         units = unitschange;
-        if(weather.data!==undefined){
-            const data = fetch(`${api_weather.base}?lat=${weather.data.lat}&lon=${weather.data.lon}&appid=${api_weather.key}&lang=${lang}&units=${units}`)
-            .then((res)=>res.json())
-            .then((data)=>data);
-            const a = await data;
-            setWeather({
-                data:a
-            })
-        }
+        fetchData();
     }
     //complete the autocomplete function
     const autoComplete = () => {
